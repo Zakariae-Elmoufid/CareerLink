@@ -47,8 +47,7 @@ ADD id_user int;
 ALTER TABLE `joboffer`
 ADD foreign key (id_user) references `user`(id) on delete cascade on update cascade;
 
-ALTER TABLE `joboffer`
-ADD photo text;
+
 
 
 
