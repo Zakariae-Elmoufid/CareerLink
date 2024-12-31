@@ -5,18 +5,17 @@ class DataBaseConnection {
     private $db = 'careerlink';
     private $username = 'root';
     private $password = '';
-    private $connexion;
+    private $connection;
 
     public function  connect(){
         $dsn = "mysql:host=$this->host;dbname=$this->db";
         try {
-            $this->connexion = new PDO($dsn, $this->username, $this->password);
-            $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection = new PDO($dsn, $this->username, $this->password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "Connected successfully"; 
-            return $this->connexion;
+            return $this->connection;
         } catch (PDOException $e) {
             echo "Connection failed: ". $e->getMessage();
-            return null;
         }
     }
 }
