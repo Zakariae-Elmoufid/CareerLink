@@ -1,0 +1,16 @@
+{
+    "name": "youcode/career-link",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zakariae elmoufid",
+            "email": "moufidzakarie3@gmail.com"
+        }
+    ],
+    "require": {}
+    
+}
