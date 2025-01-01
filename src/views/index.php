@@ -13,18 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $roleId = $_POST['role']; // ID du rôle sélectionné
 
     // Instancier l'objet User
-    $zakaria = new User();
-    $userId = $zakaria->register($username, $email, $password, $roleId);
+    $newuser = new User();
+    $newuser->register($username, $email, $password, $roleId);
 
-    echo "Utilisateur enregistré avec succès, ID : $userId";
+    echo "Utilisateur enregistré avec succès";
 }
 
-$user = new User();
-$roles = $user->getRoles();
 
-echo '<pre>';
-print_r($roles);
-echo '</pre>';
+
+
+
 
 ?>
 
@@ -36,7 +34,8 @@ echo '</pre>';
     <title>Register</title>
 </head>
 <body>
-    <h1>Register</h1>
+   
+<h1>Register</h1>
     <form action="" method="POST">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required><br>
@@ -49,21 +48,22 @@ echo '</pre>';
 
         <label for="role">Choose a Role:</label>
         <select name="role" id="role" required>
-            <!-- Options seront affichées ici -->
-            <?php
-        
+            
+           <?php
             $newuser = new User();
             $roles =$newuser->getRoles();
 
             foreach ($roles as $role) {
                 echo '<option value="' . htmlspecialchars($role['id']) . '">' . htmlspecialchars($role['role_name']) . '</option>';
             }
-    
-            ?>
+           ?>
+            
           
         </select><br>
 
         <button type="submit" class="text-red">Register</button>
     </form>
+   
+
 </body>
 </html>

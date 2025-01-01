@@ -49,18 +49,31 @@ class User {
         $this->password = $password;
     }
     
-     
+    public function login($enteredEmail, $enteredPassword) {
+       
+          // Prepare the query to fetch the email and password
+    $query = "SELECT * FROM user WHERE email = :email AND password = :password ";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindParam(':email', $enteredEmail);
+    $stmt->bindParam(':password',$enteredPassword);
+    $stmt->execute();
+    
+    // Fetch the user
+    $user = $stmt->fetchAll();
+    return print_r($user);
+    
+    }
+
 
     public function register($username, $email, $password, $roleId) {
 
         $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute([
-            'username' => $username,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_BCRYPT),
-            'id_role' => $roleId
-        ]);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':id_role',$roleId);
+        $stmt->execute();
         
     }
 
