@@ -1,5 +1,8 @@
 <?php
 
+namespace App\config;
+use PDO;
+use PDOException;
 class DataBaseConnection {
     private $host = 'localhost';
     private $db = 'careerlink';
@@ -19,7 +22,7 @@ class DataBaseConnection {
         }
     }
 }
-$conn = new DataBaseConnection();
-$conn->connect();
+
+
 
 ?>
