@@ -2,20 +2,20 @@
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use App\Classes\User;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $enteredEmail = $_POST['enteredEmail'];
-    $enteredPassword =  $_POST['enteredPassword'];
+    $enteredEmail = $_GET['enteredEmail'];
+    $enteredPassword =  $_GET['enteredPassword'];
 
     $newuser = new User();
     $user =  $newuser->login($enteredEmail,$enteredPassword );
  
    
-    print_r($user);
-    // echo  htmlspecialchars($user['username']);
+       echo "welcome".$user['username'];
+   
+  
 
 
 
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>login</h1>
     
-    <form action="" method="POST">
+    <form action="" method="GET">
         <label for="email">Email:</label>
         <input type="email" name="enteredEmail" id="email" required><br>
 

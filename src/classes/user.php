@@ -1,5 +1,5 @@
 <?php
-// require_once __DIR__ . '/../../vendor/autoload.php';
+
 
 namespace App\Classes;
 
@@ -74,8 +74,8 @@ class User {
             $this->errors ['password'] = "Password must be at least 8 characters long.";
         }
     }
-    public function setRole($role){
-         $this->role = $role;
+    public function setRole($id_role){
+         $this->id_role = $id_role;
     }
     
     public function getErrors() {
@@ -85,50 +85,59 @@ class User {
         return !empty($this->errors);
     }
 
-    public function login($enteredEmail, $enteredPassword) {
+   
+   
+    
+
+    public function register($username, $email, $password, $id_role) {
+
+       
+        $this->setUsername($username);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setRole($id_role);
+        
+        if (!empty($this->errors)) {
+            // Retourner les erreurs de validation
+            return $this->errors;
+        }
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
+        
+
+        $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':id_role',$this->id_role);
+        $stmt->execute();
+        
+    
+    }
+
+public function login($enteredEmail, $enteredPassword) {
        
     $query = "SELECT * FROM user WHERE email = :email ";
     $stmt = $this->connection->prepare($query);
     $stmt->bindParam(':email', $enteredEmail);
     $stmt->execute();
     
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(mode: PDO::FETCH_ASSOC);
 
     
-    // Fetch the user
-    print_r($user);
-    if ($user && password_verify($enteredPassword, $user['password'])) {
-        return $user;
+    
+    if (isset($user) and password_verify($enteredPassword, $user['password'])){
+      
+            // echo "password  hach : " . $user['password'] . "<br>";
+            // echo "password saisi par l'utilisateur : " . $enteredPassword . "<br>";
+          
+            return $user;
+        
     } else {
-        return "Invalid username or password.";
+        return  "No user found with this email.";
     }
     
     }
-   
-    
-
-    public function register($username, $email, $password, $role) {
-
-       
-        $this->setUsername($username);
-        $this->setEmail($email);
-        $this->setPassword($password);
-        $this->setRole($role);
-        
-        if (empty($this->errors)) {
-
-
-        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
-        $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
-        $stmt = $this->connection->prepare($query);
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->bindParam(':id_role',$this->role);
-        $stmt->execute();
-        
-    }
-}
 
     public function getRoles() {
         try {
