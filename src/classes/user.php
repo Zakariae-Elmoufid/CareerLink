@@ -16,6 +16,7 @@ class User {
     private $id_role;
     private $dbConnection;
     private $connection;
+    private $errors = [];
 
 
 
@@ -24,7 +25,20 @@ class User {
         $this->connection = $this->dbConnection->connect();  
     }
 
+    
 
+    private function validateInput($data, $key) {
+        switch ($key) {
+            case 'username':
+                return preg_match("/^[a-zA-Z0-9_]{3,20}$/", $data);
+            case 'email':
+                return filter_var($data, FILTER_VALIDATE_EMAIL); 
+            case 'password':
+                return strlen($data) >= 8; 
+            default:
+                return false;
+        }
+    }
     public function getUsername(){
         return $this->username;
     }
@@ -38,44 +52,83 @@ class User {
     }
 
     public function setUsername($username){
-       $this->username = $username;
+        if ($this->validateInput($username, 'username')) {
+            $this->username = $username;
+        }else{
+            $this->errors['username']= "Invalid username. It must be 3-20 characters long and contain only letters, numbers, and underscores.";
+        }
     } 
 
     public function setEmail($email){
-        $this->email = $email;
+        if ($this->validateInput($email, "email")){
+            $this->email = $email;
+        }else{
+            $this->errors ['email'] = "Invalid email format.";
+        }
     }
 
     public function setPassword($password){
-        $this->password = $password;
+        if ($this->validateInput($password, 'password')) {
+            $this->password = $password;
+        }else{
+            $this->errors ['password'] = "Password must be at least 8 characters long.";
+        }
+    }
+    public function setRole($role){
+         $this->role = $role;
     }
     
+    public function getErrors() {
+        return $this->errors;
+    }
+    public function hasErrors() {
+        return !empty($this->errors);
+    }
+
     public function login($enteredEmail, $enteredPassword) {
        
-          // Prepare the query to fetch the email and password
-    $query = "SELECT * FROM user WHERE email = :email AND password = :password ";
+    $query = "SELECT * FROM user WHERE email = :email ";
     $stmt = $this->connection->prepare($query);
     $stmt->bindParam(':email', $enteredEmail);
-    $stmt->bindParam(':password',$enteredPassword);
     $stmt->execute();
     
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
     // Fetch the user
-    $user = $stmt->fetchAll();
-    return print_r($user);
+    print_r($user);
+    if ($user && password_verify($enteredPassword, $user['password'])) {
+        return $user;
+    } else {
+        return "Invalid username or password.";
+    }
     
     }
+   
+    
+
+    public function register($username, $email, $password, $role) {
+
+       
+        $this->setUsername($username);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setRole($role);
+        
+        if (empty($this->errors)) {
 
 
-    public function register($username, $email, $password, $roleId) {
-
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
         $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
         $stmt = $this->connection->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':id_role',$roleId);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':id_role',$this->role);
         $stmt->execute();
         
     }
+}
 
     public function getRoles() {
         try {

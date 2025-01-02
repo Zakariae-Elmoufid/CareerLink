@@ -10,13 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $roleId = $_POST['role']; // ID du rôle sélectionné
+    $roleId = $_POST['role']; 
 
-    // Instancier l'objet User
+
     $newuser = new User();
-    $newuser->register($username, $email, $password, $roleId);
+    
 
-    echo "Utilisateur enregistré avec succès";
+    $newuser->register( $username, $email, $password, $roleId);
+    // $errors = $newuser->getErrors();
+    if ($newuser->hasErrors()) {
+        print_r($newuser->getErrors());
+    }else{
+        echo "Utilisateur enregistré avec succès";
+    }
+
 }
 
 
@@ -38,16 +45,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h1>Register</h1>
     <form action="" method="POST">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br>
+        <input type="text" name="username" id="username" >
+        <br>
 
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required><br>
+        <input type="email" name="email" id="email" ><br>
 
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
+        <input type="password" name="password" id="password" ><br>
 
         <label for="role">Choose a Role:</label>
-        <select name="role" id="role" required>
+        <select name="role" id="role" >
             
            <?php
             $newuser = new User();

@@ -7,8 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $enteredPassword =  $_POST['enteredPassword'];
 
     $newuser = new User();
-    $newuser->login($enteredEmail,$enteredPassword );
-    echo "Log_in";
+    $user =  $newuser->login($enteredEmail,$enteredPassword );
+ 
+   
+    print_r($user);
+    // echo  htmlspecialchars($user['username']);
+
+
 
 }
 
