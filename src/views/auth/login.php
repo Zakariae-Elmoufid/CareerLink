@@ -79,7 +79,9 @@ include "../components/header.php";
       Don't have an account? <a href="#" class="text-green-600 hover:underline">Sign up</a>
     </p>
   </div>
-
+   <?php
+   include "../components/footer.php";
+   ?>
 </body>
 </html>
 
