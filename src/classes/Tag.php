@@ -7,7 +7,7 @@ use PDO;
 use PDOException;
 
 
-class Category {
+class Tag {
   private $name;
   private $dbConnection;
   private $connection;
@@ -17,49 +17,49 @@ class Category {
     $this->connection = $this->dbConnection->connect();  
 }
   
-  public function getCategory_name(){
+  public function getTag_name(){
     return $this->name;
   }
 
-  public function setCategory_name($name){
+  public function setTag_name($name){
      $this->name = $name;
   }
 
 
-  public function addCategory($name){
-      $query = "INSRT INTO category (namecategory) values(:namecategory)";
+  public function addTag($name){
+      $query = "INSRT INTO tag (nametag) values(:nametag)";
       $stmt = $this->connection->prepare($query);
-      $stmt->bindParam(":namecategory",$name);
+      $stmt->bindParam(":nametag",$name);
       $stmt->execute();
   }
 
 
-  public function displayCategory(){
-    $query = "SELECT  * FROM category ";
+  public function displayTag(){
+    $query = "SELECT  * FROM tag ";
     $stmt = $this->connection->prepare($query);
     $stmt->execute();
     $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   } 
   
-  public function updateCategory($id,$name){
-    $query = "UPDATE category  SET namecategory  = :namecategory WHERE id = :id";
+  public function updateTag($id,$name){
+    $query = "UPDATE tag  SET nametag  = :nametag WHERE id = :id";
     $stmt =  $this->connection->prepare($query);
     $stmt-> bindParam(":id",$id);
-    $stmt-> bindParam(":namecategory",$name);
+    $stmt-> bindParam(":nametag",$name);
     $stmt->execute();
 
-    echo "category up dated successful ";
+    echo "tag up dated successful ";
 
   }
 
-  public function deletCategory($id){
-    $query = "DELETE FROM category  WHERE id = :id";
+  public function deletTag($id){
+    $query = "DELETE FROM tag  WHERE id = :id";
     $stmt = $this->connection->prepare($query);
     $stmt-> bindParam(":id",$id);
     $stmt->execute();
 
-    echo "category deleted successful ";
+    echo "tag deleted successful ";
   }
 
 
