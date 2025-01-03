@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    hello hero section 
+    hello admin
 </body>
 </html>

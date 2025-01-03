@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    hello hero section 
+    hello candidate
 </body>
 </html>

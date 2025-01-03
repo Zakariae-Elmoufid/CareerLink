@@ -1,16 +1,22 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
-use App\Classes\User;
+// use App\Classes\User;
+use App\Controllers\AuthController;
 
-    $enteredEmail = $_GET['enteredEmail'];
-    $enteredPassword =  $_GET['enteredPassword'];
 
-    $newuser = new User();
-    $user =  $newuser->login($enteredEmail,$enteredPassword );
- 
-   
-    //    echo "welcome".$user['username'];
-   
+if(isset($_POST["submit"]))
+{
+
+
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $authController = new AuthController();
+        $authController->login($email,$password);
+
+
+}
+
+
   
 
 
@@ -33,10 +39,10 @@ use App\Classes\User;
 <?php 
 include "../components/header.php";
 ?>
-<div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+<div class="w-full max-w-md mx-auto my-10 bg-white rounded-lg shadow-md p-6">
     <h2 class="text-2xl font-bold text-green-600 text-center mb-6">Login</h2>
 
-    <form>
+    <form  method="POST">
       <!-- Email Input -->
       <div class="mb-4">
         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
@@ -67,6 +73,7 @@ include "../components/header.php";
       <div>
         <button
           type="submit"
+          name="submit"
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           Login
