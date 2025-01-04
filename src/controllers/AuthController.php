@@ -42,24 +42,23 @@ class AuthController{
         $userModel = new UserModel();
          $user  = $userModel->saveUser($username, $email, $password, $roleId);
 
-         if($user == null)
-         {
-             echo "user not found please check ...";
-         }
-         else{
-             if($user->getRole()->getName() == "admin")
-             {
-                 header("Location:../admin/index.php");
-             }
-             else if($user->getRole()->getName() == "candidate")
-             {
-               header("Location:../candidate/index.php");
-             }
-             else if($user->getRole()->getName() == "recruiter")
-             {
-               header("Location:../recruiter/index.php");
-             }
-         }
+         
+            if($user == "3")
+            {
+                header("Location:../admin/index.php");
+            }
+            else if($user == "1")
+            {
+              header("Location:../candidate/index.php");
+            }
+            else if($user == "2")
+            {
+              header("Location:../recruiter/index.php");
+            }else{
+                return $user;
+            }
+            
+         
     }
 
 
