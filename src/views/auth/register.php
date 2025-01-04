@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use App\Controllers\AuthController;
+use App\Models\UserModel;
 
 
 
@@ -15,7 +16,7 @@ if(isset($_POST["submit"])) {
 
     $authController = new AuthController();
     $errors = $authController->register( $username, $email, $password, $roleId);
-
+   
    
 
 
@@ -103,7 +104,7 @@ include "../components/header.php";
 
             
             <?php
-             $newuser = new UserModel;
+             $newuser = new UserModel();
              $roles =$newuser->getRoles();
  
              foreach ($roles as $role) {
