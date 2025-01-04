@@ -51,16 +51,26 @@ class UserModel{
         $user ->setPassword($password);
         $user ->setId_role($roleId);
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        if (!empty($user->getErrors())) {
+                 echo "salam<br>";
+                $error = $user->getErrors();
+                echo "by<br>";
+                  return $error ;
+                   
+        }else{
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':id_role',$roleId);
+            $stmt->execute();
+             return $roleId;
+        }
+       
 
-        $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->bindParam(':id_role',$roleId);
-        $stmt->execute();
-        return  $user;
+        
 
     }
 

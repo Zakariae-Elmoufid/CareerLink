@@ -11,7 +11,7 @@ class User {
     private $id;
     private $username;
     private $email;
-    // private  Role $role;
+   
     private $password;
     private $id_role;
    
@@ -21,7 +21,6 @@ class User {
         $this->email = $email;
         $this->password = $password;
         $this->id_role = $id_role;
-        // $this->role = $role ?? new Role(0, "Guest");
      
     }
 
@@ -29,10 +28,7 @@ class User {
 
 
 
-    // public function __construct() {
-    //     $this->dbConnection = new DataBaseConnection();  
-    //     $this->connection = $this->dbConnection->connect();  
-    // }
+
 
     
 
@@ -63,9 +59,7 @@ class User {
         return $this->id_role;
     }
 
-    public function getRole(){
-        return $this->role;
-    }
+
  
     public function setUsername($username){
         if ($this->validateInput($username, 'username')) {
@@ -97,9 +91,7 @@ class User {
     public function getErrors() {
         return $this->errors;
     }
-    public function hasErrors() {
-        return !empty($this->errors);
-    }
+    
 
    
    

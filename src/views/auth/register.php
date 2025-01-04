@@ -15,16 +15,13 @@ if(isset($_POST["submit"])) {
 
 
     $authController = new AuthController();
-    $authController->register( $username, $email, $password, $roleId);
-    
-  // $errors = $newuser->getErrors();
-    // if ($newuser->hasErrors()) {
-    //     print_r($newuser->getErrors());
-    // }else{
-    //     echo "Utilisateur enregistré avec succès";
-    // }
+    $errors = $authController->register( $username, $email, $password, $roleId);
+
+   
+
 
 }
+
 
 
 
@@ -59,21 +56,26 @@ include "../components/header.php";
           name="username"
           placeholder="Enter your name"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>"
           required
         />
+        <small class="text-red-500"><?php echo $errors['username'] ?? ''; ?></small>
+
       </div>
 
       <!-- Email Input -->
       <div class="mb-4">
         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
         <input
-          type="email"
+          type="text"
           id="email"
           name="email"
           placeholder="Enter your email"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          required
+          value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"
+
         />
+        <small class="text-red-500"><?php echo $errors['email'] ?? '' ; ?></small>
       </div>
 
       <!-- Password Input -->
@@ -85,8 +87,10 @@ include "../components/header.php";
           name="password"
           placeholder="Enter your password"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>"
           required
         />
+        <small class="text-red-500"><?php echo $errors['password'] ?? '' ; ?></small>
       </div>
 
       <div class="mb-4">
