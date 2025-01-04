@@ -49,17 +49,17 @@ class Tag {
     $stmt-> bindParam(":nametag",$name);
     $stmt->execute();
 
-    echo "tag up dated successful ";
+    echo "category up dated successful ";
 
   }
 
   public function deletTag($id){
-    $query = "DELETE FROM tag  WHERE id = :id";
+    $query = "DELETE FROM category  WHERE id = :id";
     $stmt = $this->connection->prepare($query);
     $stmt-> bindParam(":id",$id);
     $stmt->execute();
 
-    echo "tag deleted successful ";
+    echo "category deleted successful ";
   }
 
 

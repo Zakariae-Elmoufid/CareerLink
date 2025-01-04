@@ -3,27 +3,36 @@
 
 namespace App\Classes;
 
-use App\config\DataBaseConnection;
-use PDO;
-use PDOException;
+// use PDO;
+// use PDOException;
 
 
 class User {
     private $id;
     private $username;
     private $email;
+    // private  Role $role;
     private $password;
     private $id_role;
-    private $dbConnection;
-    private $connection;
+   
+
+    public function __construct($username, $email, $password ,$id_role) {
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->id_role = $id_role;
+        // $this->role = $role ?? new Role(0, "Guest");
+     
+    }
+
     private $errors = [];
 
 
 
-    public function __construct() {
-        $this->dbConnection = new DataBaseConnection();  
-        $this->connection = $this->dbConnection->connect();  
-    }
+    // public function __construct() {
+    //     $this->dbConnection = new DataBaseConnection();  
+    //     $this->connection = $this->dbConnection->connect();  
+    // }
 
     
 
@@ -50,7 +59,14 @@ class User {
     public function getPassword(){
         return $this->password;
     }
+    public function getId_role(){
+        return $this->id_role;
+    }
 
+    public function getRole(){
+        return $this->role;
+    }
+ 
     public function setUsername($username){
         if ($this->validateInput($username, 'username')) {
             $this->username = $username;
@@ -74,7 +90,7 @@ class User {
             $this->errors ['password'] = "Password must be at least 8 characters long.";
         }
     }
-    public function setRole($id_role){
+    public function setId_role($id_role){
          $this->id_role = $id_role;
     }
     
@@ -89,68 +105,56 @@ class User {
    
     
 
-    public function register($username, $email, $password, $id_role) {
+    // public function register($username, $email, $password, $id_role) {
 
        
-        $this->setUsername($username);
-        $this->setEmail($email);
-        $this->setPassword($password);
-        $this->setRole($id_role);
+    //     $this->setUsername($username);
+    //     $this->setEmail($email);
+    //     $this->setPassword($password);
+    //     $this->setRole($id_role);
         
-        if (!empty($this->errors)) {
-            // Retourner les erreurs de validation
-            return $this->errors;
-        }
-        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
+    //     // if (!empty($this->errors)) {
+    //     //     // Retourner les erreurs de validation
+    //     //     return $this->errors;
+    //     // }
+    //     $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
         
 
-        $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
-        $stmt = $this->connection->prepare($query);
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->bindParam(':id_role',$this->id_role);
-        $stmt->execute();
+    //     $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
+    //     $stmt = $this->connection->prepare($query);
+    //     $stmt->bindParam(':username', $this->username);
+    //     $stmt->bindParam(':email', $this->email);
+    //     $stmt->bindParam(':password', $hashedPassword);
+    //     $stmt->bindParam(':id_role',$this->id_role);
+    //     $stmt->execute();
         
     
-    }
+    // }
 
-public function login($enteredEmail, $enteredPassword) {
+// public function login($enteredEmail, $enteredPassword) {
        
-    $query = "SELECT * FROM user WHERE email = :email ";
-    $stmt = $this->connection->prepare($query);
-    $stmt->bindParam(':email', $enteredEmail);
-    $stmt->execute();
+//     $query = "SELECT * FROM user WHERE email = :email ";
+//     $stmt = $this->connection->prepare($query);
+//     $stmt->bindParam(':email', $enteredEmail);
+//     $stmt->execute();
     
-    $user = $stmt->fetch(mode: PDO::FETCH_ASSOC);
+//     $user = $stmt->fetch(mode: PDO::FETCH_ASSOC);
 
     
     
-    if (isset($user) and password_verify($enteredPassword, $user['password'])){
+//     if (isset($user) and password_verify($enteredPassword, $user['password'])){
       
-            // echo "password  hach : " . $user['password'] . "<br>";
-            // echo "password saisi par l'utilisateur : " . $enteredPassword . "<br>";
+//             // echo "password  hach : " . $user['password'] . "<br>";
+//             // echo "password saisi par l'utilisateur : " . $enteredPassword . "<br>";
           
-            return $user;
+//             return $user;
         
-    } else {
-        return  "No user found with this email.";
-    }
-    
-    }
+//     } else {
+//         return  "No user found with this email.";
+//     }
+//    }
 
-    public function getRoles() {
-        try {
-            $sql = "SELECT * FROM role";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->execute();
-    
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        } catch (PDOException $e) {
-            echo "Error fetching roles: " . $e->getMessage();
-        }
-       
-    }
+   
 }
 
 

@@ -1,23 +1,31 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
-// use App\Classes\User;
 use App\Controllers\AuthController;
+// use App\Classes\User;
+use App\Models\UserModel;
 
 
-if(isset($_POST["submit"]))
-{
 
 
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $authController = new AuthController();
-        $authController->login($email,$password);
+if(isset($_POST["submit"])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $roleId = $_POST['role']; 
 
+
+    $authController = new AuthController();
+    $authController->register( $username, $email, $password, $roleId);
+    
+  // $errors = $newuser->getErrors();
+    // if ($newuser->hasErrors()) {
+    //     print_r($newuser->getErrors());
+    // }else{
+    //     echo "Utilisateur enregistré avec succès";
+    // }
 
 }
 
-
-  
 
 
 
@@ -43,6 +51,18 @@ include "../components/header.php";
     <h2 class="text-2xl font-bold text-green-600 text-center mb-6">Login</h2>
 
     <form  method="POST">
+    <div class="mb-4">
+        <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+        <input
+          type="name"
+          id="name"
+          name="username"
+          placeholder="Enter your name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+      </div>
+
       <!-- Email Input -->
       <div class="mb-4">
         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
@@ -69,6 +89,29 @@ include "../components/header.php";
         />
       </div>
 
+      <div class="mb-4">
+      <label for="role" class="block text-gray-700 font-medium mb-2">Role</label>
+
+      <select 
+      name="role"
+       id="role" 
+       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+       >
+
+            
+            <?php
+             $newuser = new UserModel;
+             $roles =$newuser->getRoles();
+ 
+             foreach ($roles as $role) {
+                 echo '<option value="' . htmlspecialchars($role['id']) . '">' . htmlspecialchars($role['role_name']) . '</option>';
+             }
+            ?>
+             
+           
+         </select><br>
+      </div>
+
       <!-- Submit Button -->
       <div>
         <button
@@ -76,19 +119,22 @@ include "../components/header.php";
           name="submit"
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
         >
-          Login
+          Register
         </button>
       </div>
     </form>
 
     <!-- Additional Links -->
     <p class="text-center text-sm text-gray-600 mt-4">
-      Don't have an account? <a href="#" class="text-green-600 hover:underline">Sign up</a>
+      you have an account? <a href="#" class="text-green-600 hover:underline">Logi in</a>
     </p>
   </div>
    <?php
    include "../components/footer.php";
    ?>
 </body>
-</html>
 
+
+
+</body>
+</html>
