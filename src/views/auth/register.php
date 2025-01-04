@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use App\Controllers\AuthController;
-// use App\Classes\User;
 use App\Models\UserModel;
+
 
 
 
@@ -16,7 +16,7 @@ if(isset($_POST["submit"])) {
 
     $authController = new AuthController();
     $errors = $authController->register( $username, $email, $password, $roleId);
-
+   
    
 
 
@@ -37,7 +37,7 @@ if(isset($_POST["submit"])) {
     <link href="../../output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>login</title>
+    <title>Register</title>
 </head>
 <body>
    
@@ -104,7 +104,7 @@ include "../components/header.php";
 
             
             <?php
-             $newuser = new UserModel;
+             $newuser = new UserModel();
              $roles =$newuser->getRoles();
  
              foreach ($roles as $role) {

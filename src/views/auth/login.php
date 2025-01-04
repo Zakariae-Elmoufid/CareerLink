@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
-// use App\Classes\User;
 use App\Controllers\AuthController;
 
 
@@ -11,7 +10,8 @@ if(isset($_POST["submit"]))
         $email = $_POST["email"];
         $password = $_POST["password"];
         $authController = new AuthController();
-        $authController->login($email,$password);
+        $errors  =   $authController->login($email,$password);
+        
 
 
 }
@@ -54,6 +54,8 @@ include "../components/header.php";
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           required
         />
+        <small class="text-red-500"><?php echo $errors['email'] ?? '' ; ?></small>
+
       </div>
 
       <!-- Password Input -->
@@ -67,6 +69,8 @@ include "../components/header.php";
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           required
         />
+        <small class="text-red-500"><?php echo $errors['password'] ?? '' ; ?></small>
+
       </div>
 
       <!-- Submit Button -->

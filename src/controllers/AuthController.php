@@ -16,7 +16,7 @@ class AuthController{
         $user =  $userModel->findUserByEmailAndPassword($email, $password);
         if($user == null)
         {
-            echo "user not found please check ..." . print_r($user);
+            echo "user not found please check ..." . $user;
         }
         else{
             if($user == "admin")
@@ -30,9 +30,10 @@ class AuthController{
             else if($user == "recruiter")
             {
               header("Location:../recruiter/index.php");
+            }else{
+                return $user;
             }
-            echo "hello zakariar <br>";
-            var_dump($user);
+            
         }
     }
 

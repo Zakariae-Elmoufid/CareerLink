@@ -6,9 +6,9 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
 
   if(isset($_POST["submit"])){
        $nameCategory = $_POST["name"];
-       $newCategory = new Category();
-       $newCategory->addCategory($nameCategory);
-  }
+       $newCategory = new Category($nameCategory);
+       $errors = $newCategory->addCategory($nameCategory);
+   }
 
 ?>
 
@@ -37,6 +37,8 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
             <input id="category-name" type="text" placeholder="Enter category name" 
               name="name"
               class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-400">
+              <small class="text-red-500"><?php echo $errors['name'] ?? ''; ?></small>
+
           </div>
           <button type="submit" name="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Add Category</button>
         </form>
