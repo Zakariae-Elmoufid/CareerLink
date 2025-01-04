@@ -23,7 +23,7 @@
            <a href="addCategory.php"
             class="  px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
             <i class='bx bx-plus mr-2'></i>
-            Add Player
+            Add Category
               </a>
         </div>
        

@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Classes\Role;
+// use App\Classes\Role;
 use App\Classes\User;
 use App\Config\DataBaseConnection;
 use PDO;
