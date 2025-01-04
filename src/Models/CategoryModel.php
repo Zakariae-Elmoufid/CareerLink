@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Models;
-use App\Classes\Category;
+// use App\Classes\Category;
 use App\config\DataBaseConnection;
+use PDO;
 
 
 class CategoryModel{
@@ -24,8 +25,14 @@ class CategoryModel{
         $lastInsertId = $this->conn->lastInsertId(); // ID de la dernière insertion
         echo  "Données ajoutées avec succès. ID : " . $lastInsertId;
     } 
+   }
 
-
+   public function fetchAllCategory(){
+        $query = "SELECT  * FROM category ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
    }
 
 }

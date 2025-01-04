@@ -56,13 +56,11 @@ public function setName($name){
 }
 
 
-  // public function displayCategory(){
-  //   $query = "SELECT  * FROM category ";
-  //   $stmt = $this->connection->prepare($query);
-  //   $stmt->execute();
-  //   $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
-  //   return $result;
-  // } 
+  public function displayCategory(){
+       $fetch = new CategoryModel() ;
+       $row =  $fetch->fetchAllCategory();
+      return $row;
+  } 
   
   // public function updateCategory($id,$name){
   //   $query = "UPDATE category  SET namecategory  = :namecategory WHERE id = :id";
