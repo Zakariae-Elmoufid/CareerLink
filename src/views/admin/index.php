@@ -6,28 +6,15 @@
   <title>Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="bg-gray-100">
     <!-- header section   -->
     <?php 
         include "../components/headerAdmin.php";
         ?>
   <!-- Sidebar -->
-  <div class="flex ">
-    <div class="w-1/5 bg-green-600 text-white  py-4 pl-4 h-screen">
-      <h2 class="text-2xl font-bold my-5  ">Admin Dashboard</h2>
-      <ul>
-        <li class="mb-4">
-          <a href="#categories" class="block py-2 px-4 pl-4 hover:text-green-600 hover:bg-gray-100 rounded-l-full">Manage Categories</a>
-        </li>
-        <li class="mb-4">
-          <a href="#tags" class="block py-2 px-4 hover:text-green-600 hover:bg-gray-100 rounded-l-full">Manage Tags</a>
-        </li>
-        <li class="mb-4">
-          <a href="#stats" class="block py-2 px-4 hover:text-green-600 hover:bg-gray-100 rounded-l-full">View Statistics</a>
-        </li>
-      </ul>
-    </div>
-
+  <?php
+  include "../components/sidbarAdmin.php";
+  ?>
     <!-- Main Content -->
     <div class="w-4/5 p-10">
 
