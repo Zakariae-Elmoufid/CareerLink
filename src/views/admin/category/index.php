@@ -41,30 +41,35 @@ use App\classes\Category;
             </tr>
         </thead>
         <tbody class="text-gray-700">
-            <?php
-            $categoryModel = new Category("");
-            $categories = $categoryModel->displayCategory();
+    <?php
+    $categoryModel = new Category("");
+    $categories = $categoryModel->displayCategorys();
 
-                $counter = 1; 
-                foreach ($categories as $category) {
-                    echo "
-                    <tr class='bg-gray-100'>
-                        <td class='px-6 py-3 border'>{$counter}</td>
-                        <td class='px-6 py-3 border'>{$category['namecategory']}</td>
-                        <td class='px-6 py-3 border flex gap-3'>
-                            <a href='/edit-category/{$category['id']}' class='px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600'>
-                                Edit
-                            </a>
-                            <a href='/delete-category/{$category['id']}' class='px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600'>
-                                Delete
-                            </a>
-                        </td>
-                    </tr>";
-                    $counter++;
-                }
-            
-            ?>
-        </tbody>
+    $counter = 1;
+    foreach ($categories as $category) {
+        ?>
+        <tr class="bg-gray-100">
+            <!-- Affichage du compteur -->
+            <td class="px-6 py-3 border"><?= $counter ?></td>
+            <!-- Affichage du nom de la catégorie -->
+            <td class="px-6 py-3 border"><?= $category['namecategory'] ?></td>
+            <td class="px-6 py-3 border flex gap-3">
+                <!-- Lien vers la page d'édition -->
+                <a href="editCategory.php?id=<?= $category['id']; ?>" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Edit
+                </a>
+                <!-- Lien vers la page de suppression -->
+                <a href="deleteCategory.php?id=<?= $category['id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        <?php
+        $counter++;
+    }
+    ?>
+</tbody>
+
     </table>
 </div>
 

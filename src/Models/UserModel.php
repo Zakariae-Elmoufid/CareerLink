@@ -75,9 +75,6 @@ class UserModel{
              return $roleId;
         }
        
-
-        
-
     }
 
     public function getRoles() {

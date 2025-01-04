@@ -56,22 +56,30 @@ public function setName($name){
 }
 
 
-  public function displayCategory(){
+  public function displayCategorys(){
        $fetch = new CategoryModel() ;
-       $row =  $fetch->fetchAllCategory();
-      return $row;
+       $rows =  $fetch->fetchAllCategory();
+      return $rows;
   } 
   
-  // public function updateCategory($id,$name){
-  //   $query = "UPDATE category  SET namecategory  = :namecategory WHERE id = :id";
-  //   $stmt =  $this->connection->prepare($query);
-  //   $stmt-> bindParam(":id",$id);
-  //   $stmt-> bindParam(":namecategory",$name);
-  //   $stmt->execute();
+  public function displayCategory($id){
+    $fetch = new CategoryModel();
+    $row = $fetch->fechCategoryById($id);
+    return $row;
+  }
+  public function updateCategory($id,$name){
+    
 
-  //   echo "category up dated successful ";
+    $this->setName($name);
 
-  // }
+    if (empty($this->getErrors())) {
+      $update = new CategoryModel();
+      $update->editCategory($id,$name);
+    }else {
+        return $this->getErrors();
+    }
+   
+  }
 
   // public function deletCategory($id){
   //   $query = "DELETE FROM category  WHERE id = :id";

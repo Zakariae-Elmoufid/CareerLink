@@ -35,5 +35,22 @@ class CategoryModel{
         return $result;
    }
 
+
+   public function fechCategoryById($id){
+    $query = "SELECT  * FROM category WHERE id = $id";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result =  $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+   }
+
+   public function editCategory($id,$name){
+    $query = "UPDATE category  SET namecategory  = :namecategory WHERE id = :id";
+    $stmt =  $this->conn->prepare($query);
+    $stmt-> bindParam(":namecategory",var: $name);
+    $stmt-> bindParam(":id",$id);
+    $result = $stmt->execute();
+    return $result;
+  }
 }
 ?>
