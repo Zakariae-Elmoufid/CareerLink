@@ -20,6 +20,15 @@ class UserModel{
     }
 
     public function findUserByEmailAndPassword($email, $password){
+        $user = new User( $username=null,$email,$password, $roleId=null);
+
+        $user ->setEmail($email);
+        $user ->setPassword($password);
+
+        if (!empty($user->getErrors())) {
+            $error = $user->getErrors();
+            return $error ;  
+        }else{
         $query = "SELECT * FROM user 
         join  role on role.id = user.id_role 
         WHERE email = :email";
@@ -32,14 +41,14 @@ class UserModel{
 
        
         
-        if ($row and !password_verify($password, hash: $row['password'])){
-        // $role = new Role($row["id"], $row["role_name"]);
-        // $user =  new User($row['username'], $row["email"],  $row["password"], $row["id_role"]);
+        if ($row && !password_verify($password, hash: $row['password'])){
+        
          return  $row['role_name'] ;
 
         } else {
              return  null;
          }
+        }  
     }
 
 
@@ -52,11 +61,8 @@ class UserModel{
         $user ->setId_role($roleId);
 
         if (!empty($user->getErrors())) {
-                 echo "salam<br>";
                 $error = $user->getErrors();
-                echo "by<br>";
-                  return $error ;
-                   
+                return $error ;  
         }else{
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO user (username, email, password, id_role) VALUES (:username, :email, :password, :id_role)";
