@@ -7,9 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- header section   -->
+    <?php 
+        include "../components/headerAdmin.php";
+        ?>
   <!-- Sidebar -->
-  <div class="flex">
-    <div class="w-1/5 bg-green-600 text-white  py-4 pl-4">
+  <div class="flex ">
+    <div class="w-1/5 bg-green-600 text-white  py-4 pl-4 h-screen">
       <h2 class="text-2xl font-bold my-5  ">Admin Dashboard</h2>
       <ul>
         <li class="mb-4">
@@ -26,35 +30,20 @@
 
     <!-- Main Content -->
     <div class="w-4/5 p-10">
-      <!-- header section   -->
-        <?php 
-        include "../components/headerAdmin.php";
-        ?>
-      <!-- Categories Section -->
-      <section id="categories" class="mb-10">
-        <h3 class="text-2xl font-bold text-green-600 mb-5">Manage Categories</h3>
-        <form class="bg-white p-6 rounded shadow">
-          <div class="mb-4">
-            <label for="category-name" class="block text-gray-700">Category Name</label>
-            <input id="category-name" type="text" placeholder="Enter category name" 
-              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-400">
-          </div>
-          <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Add Category</button>
-        </form>
-      </section>
 
-      <!-- Tags Section -->
-      <section id="tags" class="mb-10">
-        <h3 class="text-2xl font-bold text-green-600 mb-5">Manage Tags</h3>
-        <form class="bg-white p-6 rounded shadow">
-          <div class="mb-4">
-            <label for="tag-name" class="block text-gray-700">Tag Name</label>
-            <input id="tag-name" type="text" placeholder="Enter tag name" 
-              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-400">
-          </div>
-          <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Add Tag</button>
-        </form>
-      </section>
+
+    <!-- hello Section -->  
+
+    <div class="bg-green-200 w-full h-40 mx-auto flex justify-between items-center relative">
+       <div class="pl-10">
+        <h2>Welcome back admin!👋</h2>
+       </div>
+        <img
+        class="w-50 h-40  absolute  right-12 bottom-7"
+        src="../assets/images/Welcomepage.png" alt="">
+    </div>
+      
+     
 
       <!-- Statistics Section -->
       <section id="stats">
