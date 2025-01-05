@@ -38,12 +38,12 @@ class UserModel{
         $stmt->execute();
         
         $row = $stmt->fetch(mode: PDO::FETCH_ASSOC);
-
+        
        
         
         if ($row && !password_verify($password, hash: $row['password'])){
         
-         return  $row['role_name'] ;
+         return  $row;
 
         } else {
              return  null;

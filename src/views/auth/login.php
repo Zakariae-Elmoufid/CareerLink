@@ -3,15 +3,18 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 use App\Controllers\AuthController;
 
 
+
+
+
 if(isset($_POST["submit"]))
 {
 
-
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $authController = new AuthController();
-        $errors  =   $authController->login($email,$password);
-        
+  
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+  $authController = new AuthController();
+  $errors  =   $authController->login($email,$password);
+  
 
 
 }
