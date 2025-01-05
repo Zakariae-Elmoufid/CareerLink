@@ -12,6 +12,7 @@ class Tag {
   private $errors = [];
 
 
+
   public function __construct() {
      
   }
@@ -24,7 +25,7 @@ class Tag {
 }
 
   public function setTag_name($name){
-       $patter = "/^[a-zA-Z0-9_]{3,20}$/";
+    $patter = "/^[a-zA-Z0-9_]{3,20}$/";
     if (preg_match($patter, $name)) {
       $this->name = $name;
   }else{
