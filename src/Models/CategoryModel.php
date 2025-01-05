@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-// use App\Classes\Category;
 use App\config\DataBaseConnection;
 use PDO;
 

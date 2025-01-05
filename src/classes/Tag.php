@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\config\DataBaseConnection;
+use App\Models\TagModel;
 use PDO;
 use PDOException;
 
@@ -35,11 +36,8 @@ class Tag {
 
 
   public function displayTag(){
-    $query = "SELECT  * FROM tag ";
-    $stmt = $this->connection->prepare($query);
-    $stmt->execute();
-    $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    $fetch = new TagModel();
+    return $fetch->fetchAllTags();
   } 
   
   public function updateTag($id,$name){
