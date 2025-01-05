@@ -8,14 +8,24 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
    }    
 
    $category = new Category("");
-   $row  = $category->displayCategory($id);
+   $row = $category->displayCategory($id);
   print_r($row);
+  $errors = [];
 
-   
+  $nameCategory = $row['namecategory']; 
   if(isset($_POST["submit"])){
+       $nameCategory = trim($_POST['name']); // Récupérer la nouvelle valeur soumise
        $name = $_POST["name"];
        $newCategory = new Category($name);
-       $errors = $newCategory->updateCategory($row['id'],$name);
+       $newCategory->setName($name);
+
+       if (empty($newCategory->getErrors())) {
+         $newCategory->updateCategory($row['id'],$name);
+         header("Location: index.php");
+       }else {
+        $errors = $newCategory->getErrors();
+       }
+  
    }
 
 ?>
@@ -46,8 +56,8 @@ require_once __DIR__ . '/../../../../vendor/autoload.php';
             <input id="category-name" type="text" placeholder="Enter category name" 
               name="name"
               class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-400"
-              value="<?php echo $row['namecategory'];?>">
-              <small class="text-red-500"><?php echo $errors['namecategory'] ?? ''; ?></small>
+              value="<?php echo $nameCategory?>">
+              <small class="text-red-500"><?php echo $errors['name'] ?></small>
 
           </div>
           <button type="submit" name="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Add Category</button>

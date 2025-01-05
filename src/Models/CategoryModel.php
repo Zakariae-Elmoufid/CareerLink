@@ -52,5 +52,12 @@ class CategoryModel{
     $result = $stmt->execute();
     return $result;
   }
+
+  public function delete($id){
+    $query = "DELETE FROM category  WHERE id = :id";
+    $stmt = $this->conn->prepare($query);
+    $stmt-> bindParam(":id",$id);
+    return $stmt->execute();
+  }
 }
 ?>

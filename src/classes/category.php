@@ -69,26 +69,16 @@ public function setName($name){
   }
   public function updateCategory($id,$name){
     
-
-    $this->setName($name);
-
-    if (empty($this->getErrors())) {
       $update = new CategoryModel();
       $update->editCategory($id,$name);
-    }else {
-        return $this->getErrors();
-    }
+   
    
   }
 
-  // public function deletCategory($id){
-  //   $query = "DELETE FROM category  WHERE id = :id";
-  //   $stmt = $this->connection->prepare($query);
-  //   $stmt-> bindParam(":id",$id);
-  //   $stmt->execute();
-
-  //   echo "category deleted successful ";
-  // }
+  public function deletCategory($id){
+    $delete = new CategoryModel();
+    return  $delete->delete($id);
+  }
 
 
 }
