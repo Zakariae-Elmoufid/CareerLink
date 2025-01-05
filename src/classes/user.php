@@ -39,7 +39,7 @@ class User {
             case 'email':
                 return filter_var($data, FILTER_VALIDATE_EMAIL); 
             case 'password':
-                return strlen($data) >= 8; 
+                return strlen(string: $data) >= 8; 
             default:
                 return false;
         }
