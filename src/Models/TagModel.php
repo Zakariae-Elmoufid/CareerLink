@@ -50,4 +50,12 @@ class TagModel{
 
     }
 
+    public function removeTag($id){
+    $query = "DELETE FROM tag  WHERE id = :id";
+    $stmt = $this->conn->prepare($query);
+    $stmt-> bindParam(":id",$id);
+    return $stmt->execute();
+
+    }
+
 }

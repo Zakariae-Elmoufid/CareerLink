@@ -68,14 +68,10 @@ class Tag {
 
   }
 
-  // public function deletTag($id){
-  //   $query = "DELETE FROM category  WHERE id = :id";
-  //   $stmt = $this->connection->prepare($query);
-  //   $stmt-> bindParam(":id",$id);
-  //   $stmt->execute();
-
-  //   echo "category deleted successful ";
-  // }
+  public function deleteTag($id){
+    $remove = new TagModel();
+    return $remove->removeTag($id);  
+  }
 
 
 }
