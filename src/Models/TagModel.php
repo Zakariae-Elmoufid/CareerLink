@@ -30,4 +30,24 @@ class TagModel{
         $stmt->execute();
     }
 
+    public function findTagById($id){
+        $query = "SELECT * FROM tag WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
+
+    public function editTag($id,$tag){
+    $query = "UPDATE tag  SET nametag  = :nametag WHERE id = :id";
+    $stmt =  $this->conn->prepare($query);
+    $stmt-> bindParam(":id",$id);
+    $stmt-> bindParam(":nametag",$tag);
+    $stmt->execute();
+    header("Location: ../../../views/admin/tag/index.php");
+
+    }
+
 }

@@ -43,7 +43,7 @@ use App\Classes\Tag;
         <tbody class="text-gray-700">
     <?php
     $tagModel = new Tag();
-    $tags = $tagModel->displayTag();
+    $tags = $tagModel->displayTags();
 
     $counter = 1;
     foreach ($tags as $tag) {
@@ -55,11 +55,11 @@ use App\Classes\Tag;
             <td class="px-6 py-3 border">#<?= $tag['nametag'] ?></td>
             <td class="px-6 py-3 border flex gap-3">
                 <!-- Lien vers la page d'édition -->
-                <a href="editCategory.php?id=<?= $tag['id']; ?>" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                <a href="edit.php?id=<?= $tag['id']; ?>" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
                     Edit
                 </a>
                 <!-- Lien vers la page de suppression -->
-                <a href="deleteCategory.php?id=<?= $tag['id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+                <a href="delete.php?id=<?= $tag['id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
                     Delete
                 </a>
             </td>

@@ -34,6 +34,11 @@ class Tag {
   }
 
 
+  public function displayTags(){
+    $fetch = new TagModel();
+    return $fetch->fetchAllTags();
+  } 
+
   public function addTag($name){
       $this->setTag_name($name);
       if (empty($this->getErrors())) {
@@ -44,22 +49,24 @@ class Tag {
       }
   }
 
-
-  public function displayTag(){
-    $fetch = new TagModel();
-    return $fetch->fetchAllTags();
-  } 
+  public function displayTag($id){
+     $findTag = new TagModel();
+     $row = $findTag->findTagById($id);
+     return $row;
+  }  
   
-  // public function updateTag($id,$name){
-  //   $query = "UPDATE tag  SET nametag  = :nametag WHERE id = :id";
-  //   $stmt =  $this->connection->prepare($query);
-  //   $stmt-> bindParam(":id",$id);
-  //   $stmt-> bindParam(":nametag",$name);
-  //   $stmt->execute();
+  public function updateTag($id,$name){
+    $this->setTag_name($name);
 
-  //   echo "category up dated successful ";
+           if (empty($this->getErrors())) {
+             $edit = new TagModel();
+            $edit->editTag($id,$name);
+           }else {
+           return  $this->getErrors();
+           }
 
-  // }
+
+  }
 
   // public function deletTag($id){
   //   $query = "DELETE FROM category  WHERE id = :id";

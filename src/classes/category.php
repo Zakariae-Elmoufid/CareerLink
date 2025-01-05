@@ -68,7 +68,8 @@ public function setName($name){
     return $row;
   }
   public function updateCategory($id,$name){
-    
+    $this->setName($name);
+
       $update = new CategoryModel();
       $update->editCategory($id,$name);
    
