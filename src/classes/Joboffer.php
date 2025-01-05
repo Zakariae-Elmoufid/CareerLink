@@ -102,6 +102,11 @@ class Joboffer {
         $insertPost->insertPost($company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
     }
 
+    public function displayoffers(){
+        $fetch = new JobofferModel();
+        return $fetch->fetchoffers();
+    }
+
 
 
 }

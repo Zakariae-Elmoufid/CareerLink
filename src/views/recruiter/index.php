@@ -1,10 +1,14 @@
 <?php
 session_start();
 
-// if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
-//     header("Location: login.php");
-//     exit;
-// }
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
+
+use App\Classes\Joboffer;
+
+$display = new  Joboffer();
+$jobOffers = $display->displayoffers(); 
+ 
 
 
 ?>
@@ -63,6 +67,44 @@ session_start();
           </div>
         </div>
       </section>
+  
+      <?php
+
+foreach ($jobOffers as $jobOffer) {
+    ?>
+    <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="px-6 py-4">
+            <h2 class="text-2xl font-semibold text-center text-gray-800"><?= $jobOffer['company_name']; ?></h2>
+            <p class="text-center text-gray-600"><?= $jobOffer['position']; ?></p>
+        </div>
+
+        <div class="px-6 py-4 flex justify-between">
+            <div class="w-2/3">
+                <p class="text-gray-700"><strong>Description:</strong> <?= $jobOffer['description']; ?></p>
+                <p class="text-gray-700 mt-2"><strong>Lieu:</strong> <?= $jobOffer['location']; ?></p>
+                <p class="text-gray-700 mt-2"><strong>Salaire:</strong> <?= $jobOffer['salary']; ?> EUR</p>
+                <p class="text-gray-700 mt-2"><strong>Catégorie:</strong> <?= $jobOffer['id_category']; ?></p>
+            </div>
+            <div class="w-1/3 flex justify-center items-center">
+               
+                    <img src="uploads/<?= $jobOffer['photo']; ?>" alt="Logo de l'entreprise" class="w-32 h-32 object-cover rounded-full border-2 border-gray-200">
+                
+                
+            </div>
+        </div>
+
+        <div class="px-6 py-4 text-center">
+            <button class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
+                Postuler
+            </button>
+        </div>
+    </div>
+    <?php
+}
+?>
+
+
+
     </div>
   </div>
 

@@ -39,7 +39,17 @@ class JobofferModel{
         $tagStmt->execute();  
         }
 
-}
+    }
+    
+    public function fetchoffers(){
+        $query = "SELECT * FROM joboffer ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+ 
 }
 
 ?>
