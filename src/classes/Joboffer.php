@@ -97,6 +97,11 @@ class Joboffer {
 
 
 
+    public function AddJobOffer($company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId){
+        $insertPost = new JobofferModel();
+        $insertPost->insertPost($company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
+    }
+
 
 
 }

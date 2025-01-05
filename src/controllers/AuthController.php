@@ -1,11 +1,9 @@
 <?php
 namespace App\Controllers;
 
-// use App\Classes\User;
-// use App\Classes\Role;
-// use App\Config\DataBaseConnection;
+
 use App\Models\UserModel;
-// use PDO;
+
 
 class AuthController{
 
@@ -19,19 +17,37 @@ class AuthController{
             echo "user not found please check ..." . $user;
         }
         else{
-            if($user == "admin")
-            {
-                header("Location:../admin/index.php");
+            if($user['role_name'] == "admin"){ 
+                session_start();
+               
+                  $_SESSION['id'] = $user['id'];
+                  $_SESSION['username'] =  $user['username'];
+                  $_SESSION['is_logged_in'] = true;
+                
+                  header("Location:../admin/index.php");
             }
-            else if($user == "candidate")
+            
+            else if($user['role_name'] == "candidate")
             {
+                session_start();
+               
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['username'] =  $user['username'];
+                $_SESSION['is_logged_in'] = true;
+
               header("Location:../candidate/index.php");
             }
-            else if($user == "recruiter")
+            else if($user['role_name'] == "recruiter")
             {
+                session_start();
+               
+                  $_SESSION['id'] = $user['id'];
+                  $_SESSION['username'] =  $user['username'];
+                  $_SESSION['is_logged_in'] = true;
+                
               header("Location:../recruiter/index.php");
             }else{
-                return $user;
+                return $user['role_name'];
             }
             
         }
