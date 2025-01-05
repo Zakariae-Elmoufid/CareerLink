@@ -2,36 +2,46 @@
 
 namespace App\Classes;
 
-use App\config\DataBaseConnection;
 use App\Models\TagModel;
-use PDO;
-use PDOException;
 
 
 class Tag {
   private $name;
-  private $dbConnection;
-  private $connection;
+
+  
+  private $errors = [];
+
 
   public function __construct() {
-    $this->dbConnection = new DataBaseConnection();  
-    $this->connection = $this->dbConnection->connect();  
-}
+     
+  }
   
   public function getTag_name(){
     return $this->name;
   }
+  public function getErrors() {
+    return $this->errors;
+}
 
   public function setTag_name($name){
-     $this->name = $name;
+       $patter = "/^[a-zA-Z0-9_]{3,20}$/";
+    if (preg_match($patter, $name)) {
+      $this->name = $name;
+  }else{
+      $this->errors['name']= "Invalid name . It must be 3-20 characters ";
+  }
+     
   }
 
 
   public function addTag($name){
-      $query = "INSRT INTO tag (nametag) values(:nametag)";
-      $stmt = $this->connection->prepare($query);
-      $stmt->bindParam(":nametag",$name);
-      $stmt->execute();
+      $this->setTag_name($name);
+      if (empty($this->getErrors())) {
+      $insert = new TagModel();
+      return $insert->insertTag($name);
+      }else{
+        return $this->getErrors();
+      }
   }
 
 
@@ -40,25 +50,25 @@ class Tag {
     return $fetch->fetchAllTags();
   } 
   
-  public function updateTag($id,$name){
-    $query = "UPDATE tag  SET nametag  = :nametag WHERE id = :id";
-    $stmt =  $this->connection->prepare($query);
-    $stmt-> bindParam(":id",$id);
-    $stmt-> bindParam(":nametag",$name);
-    $stmt->execute();
+  // public function updateTag($id,$name){
+  //   $query = "UPDATE tag  SET nametag  = :nametag WHERE id = :id";
+  //   $stmt =  $this->connection->prepare($query);
+  //   $stmt-> bindParam(":id",$id);
+  //   $stmt-> bindParam(":nametag",$name);
+  //   $stmt->execute();
 
-    echo "category up dated successful ";
+  //   echo "category up dated successful ";
 
-  }
+  // }
 
-  public function deletTag($id){
-    $query = "DELETE FROM category  WHERE id = :id";
-    $stmt = $this->connection->prepare($query);
-    $stmt-> bindParam(":id",$id);
-    $stmt->execute();
+  // public function deletTag($id){
+  //   $query = "DELETE FROM category  WHERE id = :id";
+  //   $stmt = $this->connection->prepare($query);
+  //   $stmt-> bindParam(":id",$id);
+  //   $stmt->execute();
 
-    echo "category deleted successful ";
-  }
+  //   echo "category deleted successful ";
+  // }
 
 
 }

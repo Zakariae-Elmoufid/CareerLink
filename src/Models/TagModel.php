@@ -22,4 +22,12 @@ class TagModel{
         return $result;
     }
 
+
+    public function insertTag($name){
+        $query = "INSERT INTO tag (nametag) values(:nametag)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":nametag",$name);
+        $stmt->execute();
+    }
+
 }

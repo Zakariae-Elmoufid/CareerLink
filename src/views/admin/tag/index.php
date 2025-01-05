@@ -24,7 +24,7 @@ use App\Classes\Tag;
     <!-- Main Content -->
     <div class="w-4/5 p-10">
         <div class="block text-end">
-            <a href="addCategory.php" class="  px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+            <a href="add.php" class="  px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                 <i class='bx bx-plus mr-2'></i>
                 Add Tag
             </a>
