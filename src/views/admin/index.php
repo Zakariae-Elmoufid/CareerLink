@@ -7,7 +7,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
     exit;
 }
 
-echo "Bienvenue, " . $_SESSION['username'];
+echo "Bienvenue, " . $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
