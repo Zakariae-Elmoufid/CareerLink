@@ -68,12 +68,6 @@ echo "Bienvenue, " . $_SESSION['id'];
     </div>
   </div>
 
-  <!-- Script to Dynamically Update Stats -->
-  <script>
-    // Example: Dynamic Stats Update
-    document.getElementById('total-categories').textContent = 15;
-    document.getElementById('total-tags').textContent = 40;
-    document.getElementById('posts-with-tags').textContent = 78;
-  </script>
+  
 </body>
 </html>
