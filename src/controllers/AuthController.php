@@ -22,7 +22,6 @@ class AuthController{
                
                   $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
-                  $_SESSION['is_logged_in'] = true;
 
                 
                 //   header("Location:../admin/index.php");
@@ -34,7 +33,6 @@ class AuthController{
                
                 $_SESSION['id'] = $user['iduser'];
                 $_SESSION['username'] =  $user['username'];
-                $_SESSION['is_logged_in'] = true;
 
               header("Location:../candidate/index.php");
             }
@@ -44,7 +42,6 @@ class AuthController{
                
                   $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
-                  $_SESSION['is_logged_in'] = true;
 
               header("Location:../recruiter/index.php");
             }else{

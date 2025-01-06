@@ -108,7 +108,16 @@ class Joboffer {
         return $post;
     }
 
+    public function displayoffer($id){
+        $fetch = new JobofferModel();
+        $post = $fetch->fetchOfferById($id);
+        return $post;
+    }
 
+    public function updateJobOffer($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId){
+        $insertPost = new JobofferModel();
+        return $insertPost->editPost($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
+    }
 
 }
 
