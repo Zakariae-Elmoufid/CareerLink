@@ -10,6 +10,7 @@ session_start();
 $idUser = $_SESSION['id'];
 echo $idUser; 
 
+
 if (isset($_POST['submit'])) {
       $company = $_POST['company_name'];
       $position = $_POST['position'];

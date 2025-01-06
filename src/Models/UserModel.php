@@ -29,7 +29,7 @@ class UserModel{
             $error = $user->getErrors();
             return $error ;  
         }else{
-        $query = "SELECT * FROM user 
+        $query = "SELECT user.id as iduser , role.id , role.role_name as name_role , user.username as username, user.email as email , user.password FROM user 
         join  role on role.id = user.id_role 
         WHERE email = :email";
 

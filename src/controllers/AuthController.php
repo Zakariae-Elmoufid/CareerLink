@@ -17,34 +17,35 @@ class AuthController{
             echo "user not found please check ..." . $user;
         }
         else{
-            if($user['role_name'] == "admin"){ 
+            if($user['name_role'] == "admin"){ 
                 session_start();
                
-                  $_SESSION['id'] = $user['id'];
+                  $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
                   $_SESSION['is_logged_in'] = true;
+
                 
-                  header("Location:../admin/index.php");
+                //   header("Location:../admin/index.php");
             }
             
-            else if($user['role_name'] == "candidate")
+            else if($user['name_role'] == "candidate")
             {
                 session_start();
                
-                $_SESSION['id'] = $user['id'];
+                $_SESSION['id'] = $user['iduser'];
                 $_SESSION['username'] =  $user['username'];
                 $_SESSION['is_logged_in'] = true;
 
               header("Location:../candidate/index.php");
             }
-            else if($user['role_name'] == "recruiter")
+            else if($user['name_role'] == "recruiter")
             {
                 session_start();
                
-                  $_SESSION['id'] = $user['id'];
+                  $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
                   $_SESSION['is_logged_in'] = true;
-                
+
               header("Location:../recruiter/index.php");
             }else{
                 return $user['role_name'];

@@ -98,8 +98,8 @@
                             </svg>
                             Edit Profile
                         </a>
-                        <form method="POST" action="/logout" class="w-full">
-                            <button type="submit" class="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">
+                        <form method="POST" action="../auth/logout.php" class="w-full">
+                            <button type="submit" name="submit" class="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
                                 </svg>

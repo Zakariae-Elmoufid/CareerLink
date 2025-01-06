@@ -48,7 +48,8 @@ class JobofferModel{
     joboffer.description, 
     joboffer.salary, 
     joboffer.location, 
-    joboffer.id_category, 
+    joboffer.id_category,
+    category.namecategory, 
     joboffer.photo, 
     joboffer.position,
     GROUP_CONCAT(tag.nametag) AS tags
@@ -58,6 +59,7 @@ LEFT JOIN
     joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
 left join 
 tag on tag.id =     joboffer_tags.tag_id
+inner join category on category.id = joboffer.id_category
 
 GROUP BY 
     joboffer.id, 
