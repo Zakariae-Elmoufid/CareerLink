@@ -6,10 +6,6 @@ use App\Classes\Joboffer;
 
 session_start();
 
-if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
-    header("Location: login.php");
-    exit;
-}
 
 $idUser = $_SESSION['id'];
 echo $idUser; 
@@ -30,7 +26,7 @@ if (isset($_POST['submit'])) {
      
     
    $_FILES['image'];
-        $uploadDir = 'C:\xampp\htdocs\CareerLink\src\views\recruiter\uploads\\'; 
+        $uploadDir = 'uploads\\'; 
         $fileName = $_FILES['image']['name'];
         $fileTmpName = $_FILES['image']['tmp_name'];
         $fileType = $_FILES['image']['type'];

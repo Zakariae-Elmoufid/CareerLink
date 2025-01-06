@@ -10,7 +10,6 @@ $display = new  Joboffer();
 $jobOffers = $display->displayoffers(); 
  
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,10 +83,12 @@ foreach ($jobOffers as $jobOffer) {
                 <p class="text-gray-700 mt-2"><strong>Lieu:</strong> <?= $jobOffer['location']; ?></p>
                 <p class="text-gray-700 mt-2"><strong>Salaire:</strong> <?= $jobOffer['salary']; ?> EUR</p>
                 <p class="text-gray-700 mt-2"><strong>Catégorie:</strong> <?= $jobOffer['id_category']; ?></p>
+                <p class="text-gray-700 mt-2"><strong>Tag:</strong> <?= $jobOffer['id_category']; ?></p>
+
             </div>
             <div class="w-1/3 flex justify-center items-center">
                
-                    <img src="uploads/<?= $jobOffer['photo']; ?>" alt="Logo de l'entreprise" class="w-32 h-32 object-cover rounded-full border-2 border-gray-200">
+                    <img src="<?= $jobOffer['photo']; ?>" alt="Logo de l'entreprise" class="w-32 h-32 object-cover rounded-full border-2 border-gray-200">
                 
                 
             </div>

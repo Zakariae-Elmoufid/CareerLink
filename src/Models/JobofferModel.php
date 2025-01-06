@@ -42,7 +42,32 @@ class JobofferModel{
     }
     
     public function fetchoffers(){
-        $query = "SELECT * FROM joboffer ";
+        $query = "SELECT 
+    joboffer.id AS job_id, 
+    joboffer.company_name, 
+    joboffer.description, 
+    joboffer.salary, 
+    joboffer.location, 
+    joboffer.id_category, 
+    joboffer.photo, 
+    joboffer.position,
+    GROUP_CONCAT(tag.nametag) AS tags
+FROM 
+    joboffer
+LEFT JOIN 
+    joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
+left join 
+tag on tag.id =     joboffer_tags.tag_id
+
+GROUP BY 
+    joboffer.id, 
+    joboffer.company_name, 
+    joboffer.description, 
+    joboffer.salary, 
+    joboffer.location, 
+    joboffer.id_category, 
+    joboffer.photo, 
+    joboffer.position";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);

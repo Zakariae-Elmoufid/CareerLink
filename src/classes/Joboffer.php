@@ -104,7 +104,8 @@ class Joboffer {
 
     public function displayoffers(){
         $fetch = new JobofferModel();
-        return $fetch->fetchoffers();
+        $post = $fetch->fetchoffers();
+        return $post;
     }
 
 
