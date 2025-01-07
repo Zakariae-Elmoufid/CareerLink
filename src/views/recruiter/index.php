@@ -115,7 +115,7 @@ $jobOffers = $display->displayoffers();
 
 
         <div class="px-6 py-4 text-center">
-          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
+          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
           apply
           </button>
         </div>

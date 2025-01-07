@@ -1,12 +1,17 @@
 <?php 
+require_once __DIR__ . '/../../../vendor/autoload.php';
+use App\Classes\Joboffer;
  session_start();
  if(!isset($_SESSION["id"]) && !isset($_SESSION["role"]) && $_SESSION["role"] != "admin"){
      header("Location: ../auth/login.php");
      exit();
  
  }
- 
-  print_r($_SESSION);
+
+    $lastOffers = new Joboffer();
+    $jobOffers =  $lastOffers->findNewOffer(); 
+
+  print_r($offers);
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,11 +63,49 @@
           Try Premium for MAD0
         </button>
       </div>
+      <!-- Post -->
+      <?php 
+      foreach ($jobOffers as $jobOffer) {
+      ?>
+      <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-lg overflow-hidden">
+        
+        <div class="px-6 py-4 flex justify-between">
+          <div class="w-2/3">
+            <p class="text-gray-700"><strong>Description:</strong> <?= $jobOffer['description']; ?></p>
+            <p class="text-gray-700 mt-2"><strong>Location:</strong> <?= $jobOffer['location']; ?></p>
+            <p class="text-gray-700 mt-2"><strong>Salary:</strong> <?= $jobOffer['salary']; ?> EUR</p>
+            <p class="text-gray-700 mt-2"><strong>Category:</strong> <?= $jobOffer['namecategory']; ?></p>
+            <p class="text-gray-700 mt-2"><strong>Date publie:</strong> <?= $jobOffer['created_at']; ?></p>
+            <span class="text-gray-700"> <?php if ($jobOffer['tags']): ?>
+                <?php foreach (explode(',', $jobOffer['tags']) as $tag): ?>
+                  <span class="inline-block bg-green-100 text-green-800 text-xs px-2 rounded-full">#<?= $tag ?></span>
+                <?php endforeach; ?>
+              <?php else: ?>
+                
+           <?php endif; ?>
+            </span>
+          </div>
+          <div class="w-1/3 flex justify-center items-center">
+            <img src="<?= $jobOffer['photo']; ?>" alt="Company Logo"
+              class="w-32 h-32 object-cover rounded-full border-2 border-gray-200">
+          </div>
+        </div>
 
-    
+
+        <div class="px-6 py-4 text-center">
+          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
+          apply
+          </button>
+        </div>
+      </div>
+      <?php
+    }
+    ?>
     </div>
   </div>
 </section>
+
+
 
 
 </body>

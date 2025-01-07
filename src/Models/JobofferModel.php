@@ -173,6 +173,45 @@ class JobofferModel{
         return $stmt->execute();
     }
 
+    public function fetchLastOffers(){
+      $query = "SELECT 
+        joboffer.id AS job_id, 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category,
+        category.namecategory, 
+        joboffer.photo, 
+        joboffer.position,
+        joboffer.created_at,
+        GROUP_CONCAT(tag.nametag) AS tags
+        FROM 
+            joboffer
+        inner JOIN 
+            joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
+        inner join 
+        tag on tag.id =     joboffer_tags.tag_id
+        inner join category on category.id = joboffer.id_category
+
+        GROUP BY 
+        joboffer.id, 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category, 
+        joboffer.photo, 
+        joboffer.created_at,
+        joboffer.position
+        ORDER BY job_id DESC
+        LIMIT 6";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 
 
     

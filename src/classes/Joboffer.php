@@ -124,6 +124,12 @@ class Joboffer {
         return $delete->removeOffer($id);
     }
 
+    public function findNewOffer(){
+        $selectOffers = new JobofferModel();
+        $offers = $selectOffers->fetchLastOffers();
+        return $offers;
+    }
+
 }
 
 ?>
