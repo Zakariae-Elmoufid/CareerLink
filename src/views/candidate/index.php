@@ -12,13 +12,21 @@ use App\Classes\Tag;
 
     $lastOffers = new Joboffer();
     $jobOffers =  $lastOffers->findNewOffer(); 
-
+   
    
     $categoryModel = new Category("");
     $categorys = $categoryModel->displayCategorys();
 
     $tagModel = new Tag();
     $tags = $tagModel->displayTags();
+
+   if(isset($_POST['submit'])){
+       $jobId = $_POST['job_id'];
+       $userId = $_POST['user_id'];
+       $apply = new Joboffer();
+       $apply->applyjob($jobId,$userId);
+   }
+
 
  ?>
 <!DOCTYPE html>
@@ -31,7 +39,7 @@ use App\Classes\Tag;
 </head>
 <body>
     <?php 
-        include "../components/headerAdmin.php";
+        include "../components/headerCandidate.php";
         ?>
 
 <section class="bg-gray-100 py-12">
@@ -100,10 +108,13 @@ use App\Classes\Tag;
         </div>
 
 
-        <div class="px-6 py-4 text-center flex  gap-5  mx-2">
-          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
-          apply
-          </button>
+        <div class="px-6 py-4 text-center mx-4">
+          <form action="" method="POST">
+            <input type="hidden" name="job_id" value="<?= $jobOffer['job_id']; ?>"> 
+            <input type="hidden" name="user_id" value="<?=$_SESSION["id"]; ?>">
+            <button type="submit" name="submit"  class="w-full  bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">Apply</button>
+          </form>
+
           <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
           read more
           </button>

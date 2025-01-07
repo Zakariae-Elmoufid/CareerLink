@@ -35,8 +35,8 @@ if(isset($_POST['submit'])){
        move_uploaded_file($fileTmpName, $filePath);
            
        $newOffer = new Joboffer();
-       $x = $newOffer->updateJobOffer($id,$company,$position,$description, $salary ,$location,$category,$tags,$filePath,$idUser); 
-       echo $x;
+        $newOffer->updateJobOffer($id,$company,$position,$description, $salary ,$location,$category,$tags,$filePath,$idUser); 
+      
 }
 
 

@@ -212,6 +212,16 @@ class JobofferModel{
         return $result;
     }
 
+    public function apply($jobId,$userId){
+        $query = "INSERT INTO `apply` (`id_user`, `id_joboffer`)
+        VALUES (:user,:job )";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user',$userId);
+        $stmt->bindParam(':job',$jobId);
+         $stmt->execute();
+
+    }
+
 
 
     
