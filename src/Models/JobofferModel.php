@@ -158,8 +158,17 @@ class JobofferModel{
             $insertStmt->execute();
         }
 
-        
-        
+        header("Location: ../../../views/recruiter/index.php");
+
+
+    }
+
+
+    public function removeOffer($id){
+        $query = "DELETE FROM joboffer WHERE  id = :id ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id' ,$id);
+        return $stmt->execute();
     }
 
 

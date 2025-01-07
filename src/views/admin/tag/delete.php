@@ -14,6 +14,5 @@ use App\Classes\Tag;
    if($result){
        echo "Tag deleted successuful ! ";
        header("Location: index.php");
-
    }
 ?> 

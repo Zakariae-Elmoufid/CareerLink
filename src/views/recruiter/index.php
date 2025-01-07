@@ -86,8 +86,8 @@ $jobOffers = $display->displayoffers();
           <p class="text-center text-gray-600"><?= $jobOffer['position']; ?></p>
         </div>
         <div>
-          <a href="deleted.php?id=<?= $jobOffer['job_id']; ?>"
-          class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" href="">Delete</a></div>
+          <a href="delete.php?id=<?= $jobOffer['job_id']; ?>"
+          class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</a></div>
 
         </div>
         <div class="px-6 py-4 flex justify-between">
@@ -113,7 +113,7 @@ $jobOffers = $display->displayoffers();
 
 
         <div class="px-6 py-4 text-center">
-          <button class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
+          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
           apply
           </button>
         </div>
