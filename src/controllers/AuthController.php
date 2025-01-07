@@ -24,7 +24,7 @@ class AuthController{
                   $_SESSION['username'] =  $user['username'];
 
                 
-                //   header("Location:../admin/index.php");
+                  header("Location:../admin/index.php");
             }
             
             else if($user['name_role'] == "candidate")

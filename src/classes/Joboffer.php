@@ -116,7 +116,7 @@ class Joboffer {
 
     public function updateJobOffer($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId){
         $insertPost = new JobofferModel();
-        return $insertPost->editPost($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
+        $insertPost->editPost($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
     }
 
 }

@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     print_r($post);
 }
 
-if(isset($_post['submit'])){
+if(isset($_POST['submit'])){
     $company = $_POST['company_name'];
     $position = $_POST['position'];
     $description = $_POST['description'];

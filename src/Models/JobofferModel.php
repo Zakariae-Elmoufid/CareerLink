@@ -129,7 +129,6 @@ class JobofferModel{
                   
         $stmt = $this->conn->prepare($query);
     
-        // Liaison des paramètres sans spécifier de type
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':company', $company);
         $stmt->bindParam(':description', $description);
@@ -139,24 +138,34 @@ class JobofferModel{
         $stmt->bindParam(':user', $userId);
         $stmt->bindParam(':image', $filePath);
         $stmt->bindParam(':position', $position);
-        if ($stmt->execute()) {
-            return true; 
-        } else {
-            return false; 
-        }
+        $stmt->execute();
+          
       
-        $jobOfferId = $this->conn->lastInsertId();
     
 
+        $deleteQuery = "DELETE FROM `joboffer_tags` WHERE `joboffer_id` = :joboffer_id";
+        $deleteStmt = $this->conn->prepare($deleteQuery);
+        $deleteStmt->bindParam(':joboffer_id', $id);
+        $deleteStmt->execute();
+
+
         foreach ($tags as $tagId) {
-            $tagQuery = "INSERT INTO joboffer_tags (joboffer_id, tag_id) VALUES (:joboffer_id, :tag_id)";
-            $tagStmt = $this->conn->prepare($tagQuery);
-            $tagStmt->bindParam(':joboffer_id',$jobOfferId);
-            $tagStmt->bindParam(':tag_id', $tagId);
-            $tagStmt->execute();  
-            }
-    
+            $insertQuery = "INSERT INTO `joboffer_tags` (`joboffer_id`, `tag_id`) 
+                    VALUES (:joboffer_id, :tag_id)";
+            $insertStmt = $this->conn->prepare($insertQuery);
+            $insertStmt->bindParam(':joboffer_id', $id);
+            $insertStmt->bindParam(':tag_id', $tagId);
+            $insertStmt->execute();
         }
+
+        
+        
+    }
+
+
+
+    
+
 }
 
 ?>
