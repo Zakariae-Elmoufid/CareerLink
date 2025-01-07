@@ -1,13 +1,13 @@
 <?php
 
 session_start();
+if(!isset($_SESSION["id"]) && !isset($_SESSION["role"]) && $_SESSION["role"] != "admin"){
+    header("Location: ../auth/login.php");
+    exit();
 
-if (!isset($_SESSION['id']) ) {
-    header("Location: ../auth/login");
-    exit;
 }
 
-echo "Bienvenue, " . $_SESSION['id'];
+ print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>

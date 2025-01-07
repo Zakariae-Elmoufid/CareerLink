@@ -115,8 +115,19 @@ class Joboffer {
     }
 
     public function updateJobOffer($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId){
-        $insertPost = new JobofferModel();
-        $insertPost->editPost($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
+        $updatePost = new JobofferModel();
+        $updaePost->editPost($id,$company,$position,$description,$salary,$location,$categorie,$tag,$filePath,$userId);
+    }
+
+    public function deleteOffer($id){
+        $delete = new JobofferModel();
+        return $delete->removeOffer($id);
+    }
+
+    public function findNewOffer(){
+        $selectOffers = new JobofferModel();
+        $offers = $selectOffers->fetchLastOffers();
+        return $offers;
     }
 
 }
