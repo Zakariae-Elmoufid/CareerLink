@@ -1,8 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['id']) ) {
-  header("Location: login.php");
-  exit;
+if(!isset($_SESSION["id"]) && !isset($_SESSION["role"]) && $_SESSION["role"] != "admin"){
+    header("Location: ../auth/login.php");
+    exit();
+
 }
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
@@ -96,14 +97,15 @@ $jobOffers = $display->displayoffers();
             <p class="text-gray-700 mt-2"><strong>Location:</strong> <?= $jobOffer['location']; ?></p>
             <p class="text-gray-700 mt-2"><strong>Salary:</strong> <?= $jobOffer['salary']; ?> EUR</p>
             <p class="text-gray-700 mt-2"><strong>Category:</strong> <?= $jobOffer['namecategory']; ?></p>
-            <p class="text-gray-700"> <?php if ($jobOffer['tags']): ?>
+            <p class="text-gray-700 mt-2"><strong>Date publie:</strong> <?= $jobOffer['created_at']; ?></p>
+            <span class="text-gray-700"> <?php if ($jobOffer['tags']): ?>
                 <?php foreach (explode(',', $jobOffer['tags']) as $tag): ?>
                   <span class="inline-block bg-green-100 text-green-800 text-xs px-2 rounded-full">#<?= $tag ?></span>
                 <?php endforeach; ?>
               <?php else: ?>
                 
               <?php endif; ?>
-            </p>
+            </span>
           </div>
           <div class="w-1/3 flex justify-center items-center">
             <img src="<?= $jobOffer['photo']; ?>" alt="Company Logo"

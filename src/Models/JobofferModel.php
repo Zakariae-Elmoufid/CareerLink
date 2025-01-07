@@ -52,6 +52,7 @@ class JobofferModel{
         category.namecategory, 
         joboffer.photo, 
         joboffer.position,
+        joboffer.created_at,
         GROUP_CONCAT(tag.nametag) AS tags
         FROM 
             joboffer
@@ -69,6 +70,7 @@ class JobofferModel{
         joboffer.location, 
         joboffer.id_category, 
         joboffer.photo, 
+        joboffer.created_at,
         joboffer.position";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

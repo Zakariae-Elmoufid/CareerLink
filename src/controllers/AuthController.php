@@ -22,6 +22,7 @@ class AuthController{
                
                   $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
+                  $_SESSION['role'] = $user['name_role'];
 
                 
                   header("Location:../admin/index.php");
@@ -33,6 +34,8 @@ class AuthController{
                
                 $_SESSION['id'] = $user['iduser'];
                 $_SESSION['username'] =  $user['username'];
+                $_SESSION['role'] = $user['name_role'];
+
 
               header("Location:../candidate/index.php");
             }
@@ -42,6 +45,8 @@ class AuthController{
                
                   $_SESSION['id'] = $user['iduser'];
                   $_SESSION['username'] =  $user['username'];
+                  $_SESSION['role'] = $user['name_role'];
+
 
               header("Location:../recruiter/index.php");
             }else{
