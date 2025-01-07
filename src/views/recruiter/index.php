@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['id']) ) {
+  header("Location: login.php");
+  exit;
+}
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 
@@ -72,11 +75,21 @@ $jobOffers = $display->displayoffers();
     foreach ($jobOffers as $jobOffer) {
       ?>
       <div class="max-w-lg mx-auto my-10 bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="flex justify-around items-center">
+        <div>
+          <a class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+         href="edit.php?id=<?= $jobOffer['job_id']; ?>"
+          >Edit</a>
+        </div>
         <div class="px-6 py-4">
           <h2 class="text-2xl font-semibold text-center text-gray-800"><?= $jobOffer['company_name']; ?></h2>
           <p class="text-center text-gray-600"><?= $jobOffer['position']; ?></p>
         </div>
+        <div>
+          <a href="deleted.php?id=<?= $jobOffer['job_id']; ?>"
+          class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" href="">Delete</a></div>
 
+        </div>
         <div class="px-6 py-4 flex justify-between">
           <div class="w-2/3">
             <p class="text-gray-700"><strong>Description:</strong> <?= $jobOffer['description']; ?></p>

@@ -1,10 +1,13 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header with Notifications</title>
+    <title>Header</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -76,12 +79,13 @@
                 </div>
 
                 <!-- User Menu -->
-                <div class="relative group z-10">
+                <div class=" group z-10">
                     <div class="flex items-center gap-2 cursor-pointer">
                         <img class="w-10 h-10 rounded-full border-2 border-gray-300" 
                              src="https://intranet.youcode.ma/storage/users/profile/thumbnail/1130-1727859974.JPG" 
                              alt="Profile Image">
-                        <span class="font-medium text-white">Admin</span>
+                        <span class="font-medium text-white"><?php echo $_SESSION['username']?> </span>
+                        <i class='bx bx-chevron-down relative'></i>
                     </div>
 
                     <!-- Dropdown Menu -->

@@ -2,8 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
-    header("Location: login.php");
+if (!isset($_SESSION['id']) ) {
+    header("Location: ../auth/login");
     exit;
 }
 
@@ -68,12 +68,6 @@ echo "Bienvenue, " . $_SESSION['id'];
     </div>
   </div>
 
-  <!-- Script to Dynamically Update Stats -->
-  <script>
-    // Example: Dynamic Stats Update
-    document.getElementById('total-categories').textContent = 15;
-    document.getElementById('total-tags').textContent = 40;
-    document.getElementById('posts-with-tags').textContent = 78;
-  </script>
+  
 </body>
 </html>

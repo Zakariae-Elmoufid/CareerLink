@@ -43,40 +43,129 @@ class JobofferModel{
     
     public function fetchoffers(){
         $query = "SELECT 
-    joboffer.id AS job_id, 
-    joboffer.company_name, 
-    joboffer.description, 
-    joboffer.salary, 
-    joboffer.location, 
-    joboffer.id_category,
-    category.namecategory, 
-    joboffer.photo, 
-    joboffer.position,
-    GROUP_CONCAT(tag.nametag) AS tags
-FROM 
-    joboffer
-LEFT JOIN 
-    joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
-left join 
-tag on tag.id =     joboffer_tags.tag_id
-inner join category on category.id = joboffer.id_category
+        joboffer.id AS job_id, 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category,
+        category.namecategory, 
+        joboffer.photo, 
+        joboffer.position,
+        GROUP_CONCAT(tag.nametag) AS tags
+        FROM 
+            joboffer
+        LEFT JOIN 
+            joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
+        left join 
+        tag on tag.id =     joboffer_tags.tag_id
+        inner join category on category.id = joboffer.id_category
 
-GROUP BY 
-    joboffer.id, 
-    joboffer.company_name, 
-    joboffer.description, 
-    joboffer.salary, 
-    joboffer.location, 
-    joboffer.id_category, 
-    joboffer.photo, 
-    joboffer.position";
+        GROUP BY 
+        joboffer.id, 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category, 
+        joboffer.photo, 
+        joboffer.position";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
- 
+
+
+    public function fetchOfferById($id){
+        $query = "SELECT 
+        joboffer.id , 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category,
+        category.namecategory, 
+        joboffer.photo, 
+        joboffer.position,
+        GROUP_CONCAT(tag.nametag) AS tags
+        FROM 
+            joboffer
+        LEFT JOIN 
+            joboffer_tags ON joboffer.id = joboffer_tags.joboffer_id
+        left join 
+        tag on tag.id =     joboffer_tags.tag_id
+        inner join category on category.id = joboffer.id_category
+           Where joboffer.id  = :id
+        GROUP BY 
+        joboffer.id, 
+        joboffer.company_name, 
+        joboffer.description, 
+        joboffer.salary, 
+        joboffer.location, 
+        joboffer.id_category, 
+        joboffer.photo, 
+        joboffer.position";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
+    
+    public function editPost($id, $company, $position, $description, $salary, $location, $categorie, $tags, $filePath, $userId) {
+        $query = "UPDATE `joboffer` 
+                  SET `company_name` = :company,
+                      `description` = :description,
+                      `salary` = :salary,
+                      `location` = :location,
+                      `id_category` = :id_category,
+                      `id_user` = :user,
+                      `photo` = :image,
+                      `position` = :position
+                  WHERE `id` = :id";
+                  
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':company', $company);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':salary', $salary);
+        $stmt->bindParam(':location', $location);
+        $stmt->bindParam(':id_category', $categorie);
+        $stmt->bindParam(':user', $userId);
+        $stmt->bindParam(':image', $filePath);
+        $stmt->bindParam(':position', $position);
+        $stmt->execute();
+          
+      
+    
+
+        $deleteQuery = "DELETE FROM `joboffer_tags` WHERE `joboffer_id` = :joboffer_id";
+        $deleteStmt = $this->conn->prepare($deleteQuery);
+        $deleteStmt->bindParam(':joboffer_id', $id);
+        $deleteStmt->execute();
+
+
+        foreach ($tags as $tagId) {
+            $insertQuery = "INSERT INTO `joboffer_tags` (`joboffer_id`, `tag_id`) 
+                    VALUES (:joboffer_id, :tag_id)";
+            $insertStmt = $this->conn->prepare($insertQuery);
+            $insertStmt->bindParam(':joboffer_id', $id);
+            $insertStmt->bindParam(':tag_id', $tagId);
+            $insertStmt->execute();
+        }
+
+        
+        
+    }
+
+
+
+    
+
 }
 
 ?>
