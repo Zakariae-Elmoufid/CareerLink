@@ -1,15 +1,5 @@
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Full Header</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-
   <!-- Full Header -->
   <header class="bg-green-600 text-white w-full">
     <div class="flex items-center justify-between py-4 px-6">
@@ -31,5 +21,4 @@
     </div>
   </header>
 
-</body>
-</html>
+

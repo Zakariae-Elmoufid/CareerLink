@@ -20,18 +20,7 @@ if (isset($_POST['submit'])) {
       $category = $_POST['category'];
       $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
 
-   $_FILES['image'];
-        $uploadDir = 'uploads\\'; 
-        $fileName = $_FILES['image']['name'];
-        $fileTmpName = $_FILES['image']['tmp_name'];
-        $fileType = $_FILES['image']['type'];
-        $fileSize = $_FILES['image']['size'];
-        $filePath = $uploadDir . $fileName;
-
-
-
-            move_uploaded_file($fileTmpName, $filePath);
-             
+      
             $newOffer = new Joboffer();
             $newOffer->AddJobOffer($company,$position,$description,$salary,$location,$category,$tags,$filePath,$idUser);        
 
@@ -99,7 +88,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div>
-                <label for="caltegory" class="block text-gray-700 font-semibold">Category:</label>
+                <label for="caltegory" class="block text-gray-700 font-semibold">Category:</label><br>
                 <select name="category" id="category">
                     <?php
                     $categoryModel = new Category("");

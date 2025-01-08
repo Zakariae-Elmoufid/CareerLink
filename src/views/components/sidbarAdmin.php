@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Document</title>
-</head>
-<body>
-    
     <!-- Sidebar -->
     <div class="flex ">
        <div class="w-1/5 bg-green-600 text-white  py-4 pl-4 h-screen">
-         <h2 class="text-2xl font-bold my-5  ">Admin Dashboard</h2>
+         <h2 class="text-2xl font-bold my-5  ">Admin  Dashboard</h2>
          <ul>
              <li class="mb-4">
                <a href="../admin/index.php" class="block py-2 px-4 hover:text-green-600 hover:bg-gray-100 rounded-l-full">View Statistics</a>
@@ -26,9 +16,3 @@
          </ul>
        </div>
     
-
-
-</body>
-</html> 
- 
- 

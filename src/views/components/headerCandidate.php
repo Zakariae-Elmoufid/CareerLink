@@ -2,24 +2,13 @@
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use App\classes\Joboffer;
 
-// if(isset($_POST['sub'])){
     $id_user = $_SESSION['id'];
     $displayCount = new Joboffer();
     $count = $displayCount->Applaycount($id_user);
-// }
+
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-</head>
 
 <body class="bg-gray-100">
 
@@ -34,12 +23,17 @@ use App\classes\Joboffer;
 
 
             <!-- Icons and User Menu -->
-
+            
             <div class="flex items-center gap-6 ">
+                
+                            <div class="relative ">
+                            <a href="search.php"><i class='bx bx-search-alt h-8 w-8 text-white hover:text-gray-200'></i></a>
+                            </div>  
              <div class="relative ">
                  <i class='bx bxs-shopping-bag  h-6 w-6 text-white hover:text-gray-200'></i>
                  <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5"><?= $count['count(id_joboffer)']?></span>
-             </div>   
+             </div>  
+             
 
               <!-- Notification Icon -->
               <div class="relative group">
@@ -123,6 +117,3 @@ use App\classes\Joboffer;
         </div>
     </header>
  
-</body>
-
-</html>

@@ -15,12 +15,12 @@ class UserModel{
     private $db;
 
     public function __construct() {
-        $this->db = new DataBaseConnection();  
-        $this->conn = $this->db->connect(); 
+        $db = new DataBaseConnection();  
+        $this->conn = $db->connect(); 
     }
 
     public function findUserByEmailAndPassword($email, $password){
-        $user = new User( $username=null,$email,$password, $roleId=null);
+        $user = new User( $username=null,$email,$password, id_role: $roleId=null);
 
         $user ->setEmail($email);
         $user ->setPassword($password);
