@@ -222,6 +222,17 @@ class JobofferModel{
 
     }
 
+    public function fetchApplay(){
+        $query = "SELECT username , email , date_apply ,position 
+        FROM apply
+        inner join  `user` on `user`.id = apply.id_user
+        inner join joboffer on joboffer.id = apply.id_joboffer";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+        
+    }
 
 
     

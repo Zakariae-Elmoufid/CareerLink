@@ -28,7 +28,7 @@ $jobOffers = $display->displayoffers();
 <body class="bg-gray-100">
   <!-- header section   -->
   <?php
-  include "../components/headerAdmin.php";
+  include "../components/headerRecruiter.php";
   ?>
   <!-- Sidebar -->
   <?php

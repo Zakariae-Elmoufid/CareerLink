@@ -133,7 +133,12 @@ class Joboffer {
     public function applyjob($jobId,$userId){
         $insetApply = new JobofferModel();
         $insetApply->apply($jobId,$userId);  
-      }
+    }
+
+    public function selectApplay(){
+        $selectApplay =  new JobofferModel();
+        return $selectApplay->fetchApplay();
+    }
 
 }
 
