@@ -140,6 +140,15 @@ class Joboffer {
         return $selectApplay->fetchApplay();
     }
 
+    public function countApplay(){
+        $count = new JobofferModel();
+        return $count->selectcount();
+    }
+    public function Applaycount($id){
+        $count = new JobofferModel();
+        return $count->CandidateApplay($id);
+    }
+
 }
 
 ?>

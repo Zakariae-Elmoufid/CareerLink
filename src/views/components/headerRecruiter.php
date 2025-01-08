@@ -1,4 +1,9 @@
-
+<?php
+require_once __DIR__ . '/../../../vendor/autoload.php';
+use App\classes\Joboffer;
+$displayCount = new Joboffer();
+$count = $displayCount->countApplay();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +33,7 @@
             <div class="flex items-center gap-6 ">
              <div class="relative ">
                  <a href="../recruiter/applay.php"><i class='bx bxs-shopping-bag  h-6 w-6 text-white hover:text-gray-200'></i></a>
-                 <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5">3</span>
+                 <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5"><?= $count['COUNT(id_user)']?></span>
              </div>   
 
               <!-- Notification Icon -->
@@ -112,6 +117,8 @@
             </div>
         </div>
     </header>
+
+   
 
 </body>
 

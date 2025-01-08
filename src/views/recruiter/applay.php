@@ -12,9 +12,7 @@ use App\Classes\Joboffer;
 
 $display = new Joboffer();
 $applays = $display->selectApplay();
- 
- print_r($applays);
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,8 +77,13 @@ $applays = $display->selectApplay();
                             </td>
                             
                             <td class="px-6 py-4">
-                                <div class="text-sm font-medium text-gray-900 ">
-                                    action
+                            <div class="flex space-x-3">
+                                    <div class="bg-blue-600 text-white hover:bg-blue-900 p-1 rounded-md">
+                                        <p>Agreeable</p>
+                                    </div>
+                                    <div class="bg-red-600 text-white  hover:bg-red-900 p-1 rounded-md">
+                                       <p>Refuses</p>
+                                 </div>
                                 </div>
                             </td>
                             

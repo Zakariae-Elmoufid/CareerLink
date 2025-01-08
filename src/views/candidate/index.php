@@ -25,8 +25,10 @@ use App\Classes\Tag;
        $userId = $_POST['user_id'];
        $apply = new Joboffer();
        $apply->applyjob($jobId,$userId);
+       header('Location: '.$_SERVER['PHP_SELF']);
+       exit; 
    }
-
+   
 
  ?>
 <!DOCTYPE html>
@@ -108,14 +110,14 @@ use App\Classes\Tag;
         </div>
 
 
-        <div class="px-6 py-4 text-center mx-4">
+        <div class="px-6 py-4 text-center m-2">
           <form action="" method="POST">
             <input type="hidden" name="job_id" value="<?= $jobOffer['job_id']; ?>"> 
             <input type="hidden" name="user_id" value="<?=$_SESSION["id"]; ?>">
             <button type="submit" name="submit"  class="w-full  bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">Apply</button>
           </form>
 
-          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
+          <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200 mt-1">
           read more
           </button>
         </div>
