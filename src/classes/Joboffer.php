@@ -149,6 +149,11 @@ class Joboffer {
         return $count->CandidateApplay($id);
     }
 
+    public function shearch($post){
+        $search = new JobofferModel();
+        return $search->shearchOffer($post);
+    }
+
 }
 
 ?>

@@ -5,6 +5,26 @@ use App\Classes\Category;
 use App\Classes\Tag;
 session_start();
 
+if(isset($_GET['post'])){
+    $post =  $_GET['post'];
+    echo $post; 
+    $search = new Joboffer();
+    $search->shearch($post);
+
+    if (!empty($results)) {
+        foreach ($results as $job) {
+            echo "<div class='p-4 border-b'>
+                    <h2 class='text-lg font-bold'>{$job['position']}</h2>
+                    <p class='text-gray-700'>{$job['description']}</p>
+                    <span class='text-sm text-gray-500'>Posté le : {$job['date_posted']}</span>
+                  </div>";
+        }
+    } else {
+        echo "<p class='text-gray-500'>Aucun poste trouvé.</p>";
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +58,9 @@ session_start();
                     <input type="text" 
                     placeholder="search job offer..."
                     class="w-full mb-2  px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onkeyup="showHint(this.value)">
-                    <i class='bx bx-search absolute top-3 right-2 '></i>
+                    id="searchInput" 
+                    name="post">
+                    <i class='bx bx-search absolute top-3 right-2'></i>
                 </div>
                 <br>
 
@@ -55,11 +76,31 @@ session_start();
                     ?> 
             </form>
         </div>
-        <div class="w-4/5"> B</div>
+        <div class="w-4/5" id="result"> 
+
+        </div>
      </main>
 
      <script>
+        const searchInput =document.getElementById('searchInput');
+        searchInput.addEventListener("keyup",function(){
+            const post = this.value;
 
+            if (post.length == 0) {
+                document.getElementById("result").innerHTML = "no post now";
+                return;
+            }
+            else{
+                fetch("?post=" + encodeURIComponent(post))
+                .then(data => {
+                    document.getElementById("result").innerHTML = data; 
+                })
+                .catch(error => {
+                    console.error("Erreur :", error);
+                });
+                
+            }    
+       });      
      </script>
 
 </body>
