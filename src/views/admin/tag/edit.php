@@ -9,7 +9,6 @@ if (isset($_GET['id'])) {
 
 $category = new Tag();
 $row = $category->displayTag($id);
-print_r($row);
 
 
 $nameTag = $row['nametag'];
